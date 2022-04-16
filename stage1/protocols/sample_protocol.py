@@ -1,5 +1,6 @@
 import socket, threading
 from stem import SocketError
+
 PORT = 1337
 
 class sampleProtocol:
@@ -29,10 +30,10 @@ class sampleProtocol:
             try:
                 msg = conn.recv(1024).decode('latin-1')
             except SocketError as e:
-                print (e)
+                raise SocketError(e)
             if msg:
                 print(f"[{addr}] {msg}")
-            conn.send(bytes("HelloWorld", 'utf-8'))
+            conn.send(bytes("Hello World", 'utf-8'))
 
             if msg == "end":
                 connected = False
