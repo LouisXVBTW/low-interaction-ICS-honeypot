@@ -1,5 +1,7 @@
 import unittest, threading, socket
-from sample_protocol import sampleProtocol
+from protocols.sampleProtocol import sampleProtocol
+
+
 
 class testSampleProtocol(unittest.TestCase):
     def setUp(self) -> None:
