@@ -34,12 +34,12 @@ class sampleProtocol:
 			##welcome = b"Welcome to Linux machine\nThis is the thing"
 			##conn.send(welcome)
 			try:
-				msg = conn.recv(1024).decode('latin-1')
+				msg = conn.recv(1024)
 		
 				
 				if msg:
 					print(f"[{addr}] {msg}")
-					conn.send(bytes(msg, 'utf-8'))
+					conn.send(msg)
 				if msg == "end":
 					break
 			except SocketError as e:	
@@ -47,5 +47,5 @@ class sampleProtocol:
 
 					print(" + Added to [POTENTIAL NMAP SCANNING]")
 
-				raise e
+				break
 			conn.close()
