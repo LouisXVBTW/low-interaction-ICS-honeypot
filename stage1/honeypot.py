@@ -11,7 +11,7 @@ from files.protocols.omronFINS import *
 from files.protocols.pcWorks import *
 from files.protocols.proCon0s import *
 from files.protocols.tridiumNiagraFox import *
-from files.protocols.sampleProtocol import *
+#from files.protocols.sampleProtocol import *
 
 SERVER = "127.0.0.1"
 
