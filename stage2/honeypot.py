@@ -29,5 +29,15 @@ def launchProtocols(SERVER, protocols):
                 thread = threading.Thread(target=eval(i[:-3]), args=[SERVER, i[:-3]])
                 thread.start()
 
+
+def checkDB():
+    pass
+
+def runDash():
+    pass
+
+def exportCowrie():
+    pass
+
 if __name__ == "__main__":
     main()  

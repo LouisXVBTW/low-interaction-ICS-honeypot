@@ -29,7 +29,14 @@ Stage 1 is creating the main file structure, designing the basic protocols and l
 
 Stage 2 is embedding cowrie and potentiallialy the database, unless i can think of something else instead. 
 
-- [ ] ==adding cowrie==
-- [ ] ==create database==
+- [ ] ==create/design database==
+- [ ] ==Add logging to the protocols==
 
-connect honeypot protocols and cowrie to DB
+
+connect honeypot protocols to DB
+
+| Testing | Problems |
+| :-: | :-:| 
+|test db| |
+|input data to db| |
+|fetch data from db | | 
