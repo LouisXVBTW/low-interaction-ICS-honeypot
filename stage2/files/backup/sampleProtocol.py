@@ -1,11 +1,15 @@
 import socket, threading
 from socket import error as SocketError
 import errno
+import sys
+sys.path.append('../../database/')
+from app import addTest1, read_DB, addIpStats, addProtocolStats
 
 port = 1337
 
 class sampleProtocol:
 	def __init__(self, SERVER, protocol):
+		
 		print (SERVER, protocol)
 		ADDR = (SERVER, port) ## makes a tuple
 		print (port, SERVER, ADDR)
@@ -25,6 +29,12 @@ class sampleProtocol:
 	#only running in threads
 	def handle_client(self, conn, addr):
 		print (f"[NEW CONNECTION] {addr} connected.")
+		print(addTest1("Hello World !!!", False))
+		addIpStats("127.0.0.1", "testProtocol")
+		addProtocolStats("TESTPROTOCOL")
+		print(read_DB())
+
+
 		
 		connected = True
 		

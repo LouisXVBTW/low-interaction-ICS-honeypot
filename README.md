@@ -35,6 +35,10 @@ Stage 2 is embedding cowrie and potentiallialy the database, unless i can think 
 
 connect honeypot protocols to DB
 
+**==Whats does my db need to collect?==**
+- amount of connections from ip
+- we need a general front page data one with all ip counts, which service got the most attention, geo location, shodan scan, pewpewmap?
+
 | Testing | Problems |
 | :-: | :-:| 
 |test db| |

@@ -1,8 +1,10 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+with open("../../conf.ini", "r" ) as foo:
+    path = "sqlite:////"+foo.readline().split(':')[1]
 
-engine = create_engine("sqlite:///stage2/database/test1.db", connect_args={"check_same_thread": False})
+engine = create_engine(path, connect_args={"check_same_thread": False})
 
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
