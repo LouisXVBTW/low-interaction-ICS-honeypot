@@ -1,8 +1,11 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-with open("../../conf.ini", "r" ) as foo:
-    path = "sqlite:////"+foo.readline().split(':')[1]
+import os
+filename = os.path.dirname(__file__)+'/db.db'
+print (filename)
+with open(filename, "r" ) as foo:
+    path = "sqlite:////"+filename
 
 engine = create_engine(path, connect_args={"check_same_thread": False})
 

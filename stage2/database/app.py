@@ -1,5 +1,7 @@
 from asyncio import protocols
 from statistics import mode
+
+from requests import Session
 import models, random
 from controller import SessionLocal, engine
 
@@ -15,7 +17,7 @@ def addTest1(ititle, icomplete) -> None:
 def addIpStats(iip, iprotocol):
     with SessionLocal.begin() as session:
         try:
-            print (type(session.query(models.IpStats).filter(models.IpStats.ip == iip)))
+            # print (type(session.query(models.IpStats).filter(models.IpStats.ip == iip)))
             for c in session.query(models.IpStats).filter(models.IpStats.ip == iip):
                 c.ipCount += 1
                 
@@ -25,22 +27,26 @@ def addIpStats(iip, iprotocol):
             new_entry = models.IpStats(ip=iip, protocol=iprotocol)
             session.add(new_entry)
             session.commit()
+
 def addProtocolStats(iprotocol):
     print(iprotocol)
-    print("first")
     new = True
     with SessionLocal.begin() as session:
-        print ("prep")
         
         for c in session.query(models.ProtocolStats).filter(models.ProtocolStats.protocol == iprotocol):
             c.protocolCount += 1
-
             new = False
+
         if new:
             new_item = models.ProtocolStats(protocol=iprotocol)
             session.add(new_item)
         session.commit()
-        
+
+def addAllInteractions(iip, itime, irawData):
+    with SessionLocal.begin() as session:
+        new_item = models.AllInteractions(ip=iip, time=itime, rawData=irawData)
+        session.add(new_item)
+        session.commit()
 
 
 def add_DB():

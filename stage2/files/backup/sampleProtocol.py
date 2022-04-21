@@ -2,7 +2,10 @@ import socket, threading
 from socket import error as SocketError
 import errno
 import sys
-sys.path.append('../../database/')
+import os
+d = os.path.dirname(__file__)+'/../../database/'
+print (d)
+sys.path.append(d)
 from app import addTest1, read_DB, addIpStats, addProtocolStats
 
 port = 1337
