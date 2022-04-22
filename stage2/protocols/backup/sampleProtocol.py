@@ -31,21 +31,8 @@ class sampleProtocol:
 
 	#only running in threads
 	def handle_client(self, conn, addr):
-		print (f"[NEW CONNECTION] {addr} connected.")
-		print(addTest1("Hello World !!!", False))
-		addIpStats("127.0.0.1", "testProtocol")
-		addProtocolStats("TESTPROTOCOL")
-		print(read_DB())
-
-
-		
 		connected = True
-		
 		while connected:
-			
-			## awaits msg
-			##welcome = b"Welcome to Linux machine\nThis is the thing"
-			##conn.send(welcome)
 			try:
 				msg = conn.recv(1024)
 		

@@ -28,10 +28,6 @@ class bacnet:
 		connected = True
 		
 		while connected:
-			
-			## awaits msg
-			##welcome = b"Welcome to Linux machine\nThis is the thing"
-			##conn.send(welcome)
 			try:
 				msg = conn.recv(1024).decode('latin-1')
 		
