@@ -1,7 +1,3 @@
-from asyncio import protocols
-from statistics import mode
-
-from requests import Session
 import models, random
 from controller import SessionLocal, engine
 
