@@ -9,6 +9,7 @@ from omronFINS import omronFINS
 
 class testSampleProtocol(unittest.TestCase):
     def setUp(self) -> None:
+        self.protocol = "testprotocol"
         self.SERVER = "127.0.0.1" #keep server running locally
         self.PORT = 9600 #random unused port for testing
         self.ADDR = (self.SERVER, self.PORT) #generate tuple

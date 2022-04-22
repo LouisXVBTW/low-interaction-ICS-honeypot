@@ -9,6 +9,7 @@ from crimsonV3 import crimsonV3
 
 class testcrimsonv3(unittest.TestCase):
     def setUp(self) -> None:
+        self.protocol = "testprotocol"
         self.SERVER = "127.0.0.1" #keep server running locally
         self.PORT = 789 #random unused port for testing
         self.ADDR = (self.SERVER, self.PORT) #generate tuple

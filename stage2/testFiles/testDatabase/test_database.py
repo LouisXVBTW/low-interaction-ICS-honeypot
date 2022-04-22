@@ -8,7 +8,7 @@ print (path)
 sys.path.append(path)
 from controller import SessionLocal, engine
 import models
-from app import read_DB, addIpStats, addProtocolStats, addAllInteractions, insertGeoShodan
+from app import addIpStats, addProtocolStats, addAllInteractions, insertGeoShodan
 
 
 class testDatabase(unittest.TestCase):

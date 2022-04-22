@@ -9,6 +9,7 @@ from proCon0s import proCon0s
 
 class testSampleProtocol(unittest.TestCase):
     def setUp(self) -> None:
+        self.protocol = "testprotocol"
         self.SERVER = "127.0.0.1" #keep server running locally
         self.PORT = 20547 #random unused port for testing
         self.ADDR = (self.SERVER, self.PORT) #generate tuple

@@ -9,6 +9,7 @@ from bacnet import bacnet
 
 class testbacnet(unittest.TestCase):
     def setUp(self) -> None:
+        self.protocol = "thisisbac"
         self.SERVER = "127.0.0.1" #keep server running locally
         self.PORT = 47808 #random unused port for testing
         self.ADDR = (self.SERVER, self.PORT) #generate tuple
