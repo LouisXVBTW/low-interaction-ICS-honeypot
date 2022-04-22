@@ -9,11 +9,10 @@ from protocols.melsecQ import *
 from protocols.modbus import *
 from protocols.omronFINS import *
 from protocols.pcWorks import *
-from protocols.proCon0s import *
 from protocols.tridiumNiagraFox import *
 #from protocols.sampleProtocol import *
 import os
-path = os.path.dirname(__file__)
+
 SERVER = "127.0.0.1"
 
 def main():
@@ -21,8 +20,12 @@ def main():
     launchProtocols(SERVER, getProtocols())
 
 def getProtocols():
-    return os.listdir(path+'/protocols/')
-
+    path = os.path.dirname(__file__)
+    print(path)
+    try:
+        return os.listdir(path+'/protocols/')
+    except:
+        return os.listdir('protocols')
 def launchProtocols(SERVER, protocols):
     for i in protocols:
         if ".py" in i:

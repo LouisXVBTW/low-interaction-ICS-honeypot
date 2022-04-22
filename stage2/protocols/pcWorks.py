@@ -1,3 +1,4 @@
+from datetime import datetime
 import sys, os
 filename = os.path.dirname(__file__)+"/../database/"
 sys.path.append(filename)
@@ -30,7 +31,8 @@ class pcWorks:
 	#only running in threads
 	def handle_client(self, conn, addr):
 		print (f"[NEW CONNECTION] {addr} connected.")
-		addIpStats(addr[0], self.protocol)
+		addIpStats(addr[0])
+		addProtocolStats(self.protocol)
 
 		connected = True
 		
@@ -46,6 +48,8 @@ class pcWorks:
 		
 				
 				if msg:
+					datetimeinfo = str(datetime.now()).split(" ")
+					addAllInteractions(addr[0], self.protocol, datetimeinfo[0], datetimeinfo[1], hexOFmsg)
 					print(f"[{addr}] {msg}")
 					conn.send(bytes(msg, 'utf-8'))
 				if msg == "end":
@@ -54,6 +58,8 @@ class pcWorks:
 				if e.errno == errno.ECONNRESET:
 
 					print(" + Added to [POTENTIAL NMAP SCANNING]")
+				datetimeinfo = str(datetime.now()).split(" ")
+				addAllInteractions(addr[0], self.protocol, datetimeinfo[0], datetimeinfo[1], "Scanner")
 
 				raise e
 		conn.close()

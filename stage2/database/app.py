@@ -10,7 +10,7 @@ def addTest1(ititle, icomplete) -> None:
         session.add(new_item)
         session.commit()
 
-def addIpStats(iip, iprotocol):
+def addIpStats(iip):
     new = True
     with SessionLocal.begin() as session:
         
@@ -19,7 +19,7 @@ def addIpStats(iip, iprotocol):
             new = False
 
         if new:
-            new_entry = models.IpStats(ip=iip, protocol=iprotocol)
+            new_entry = models.IpStats(ip=iip)
             session.add(new_entry)
   
         session.commit()
@@ -37,9 +37,9 @@ def addProtocolStats(iprotocol):
             session.add(new_item)
         session.commit()
 
-def addAllInteractions(iip, itime, irawData):
+def addAllInteractions(iip, iprotocol, idate, itime, irawData):
     with SessionLocal.begin() as session:
-        new_item = models.AllInteractions(ip=iip, time=itime, rawData=irawData)
+        new_item = models.AllInteractions(ip=iip, protocol=iprotocol, date=idate, time=itime, rawData=irawData)
         session.add(new_item)
         session.commit()
 

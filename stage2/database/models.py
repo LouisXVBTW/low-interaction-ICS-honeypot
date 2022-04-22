@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Integer, String
+from sqlalchemy import Boolean, Column, Computed, Integer, String
 
 from controller import Base
 
@@ -13,7 +13,6 @@ class IpStats(Base):
     id = Column(Integer, primary_key=True, index=True)
     ip = Column(String)
     ipCount = Column(Integer, default=1)
-    protocol = Column(String)
     country = Column(String)
     city = Column(String)
     shodan = Column(String)
@@ -28,6 +27,8 @@ class AllInteractions(Base):
     __tablename__ = "allInteractions"
     id = Column(Integer, primary_key=True, index=True)
     ip = Column(String)
+    protocol = Column(String)
+    date = Column(String)
     time = Column(String)
     rawData = Column(String)
     
