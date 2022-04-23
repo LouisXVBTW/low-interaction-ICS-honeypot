@@ -2,7 +2,6 @@ import unittest, random
 import sys, os
 from requests import Session
 
-from sqlalchemy import null
 path = os.path.dirname(__file__)+'/../../database/'
 print (path)
 sys.path.append(path)
@@ -70,4 +69,4 @@ class testDatabase(unittest.TestCase):
                 self.idall = c.id
                 self.assertEqual(c.ip, self.ip)
                 self.assertEqual(c.time, self.time)
-                self.assertEqual(c.rawData, self.rawData)
+                self.assertEqual(c.rawData, self.rawData.hex())
