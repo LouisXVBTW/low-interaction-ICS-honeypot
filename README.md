@@ -31,6 +31,7 @@ Stage 2 is creating and designing the database, create testing, inplement into c
 
 - [ ] ==create/design database==
 - [ ] ==Add logging to the protocols==
+- [ ] ==create testing==
 
 
 connect honeypot protocols to DB
