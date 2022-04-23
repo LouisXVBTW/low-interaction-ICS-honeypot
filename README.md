@@ -27,7 +27,7 @@ Stage 1 is creating the main file structure, designing the basic protocols and l
 
 ### What is stage 2?
 
-Stage 2 is embedding cowrie and potentiallialy the database, unless i can think of something else instead. 
+Stage 2 is creating and designing the database, create testing, inplement into code. unless i can think of something else instead. 
 
 - [ ] ==create/design database==
 - [ ] ==Add logging to the protocols==
