@@ -29,9 +29,9 @@ Stage 1 is creating the main file structure, designing the basic protocols and l
 
 Stage 2 is creating and designing the database, create testing, inplement into code. unless i can think of something else instead. 
 
-- [ ] ==create/design database==
-- [ ] ==Add logging to the protocols==
-- [ ] ==create testing==
+- [x] ==create/design database==
+- [x] ==Add logging to the protocols==
+- [x] ==create testing==
 
 
 connect honeypot protocols to DB
@@ -42,6 +42,6 @@ connect honeypot protocols to DB
 
 | Testing | Problems |
 | :-: | :-:| 
-|test db| |
-|input data to db| |
-|fetch data from db | | 
+|test db|&check;|
+|input data to db|&check;|
+|fetch data from db |&check;| 
