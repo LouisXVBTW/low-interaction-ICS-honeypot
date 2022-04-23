@@ -82,8 +82,8 @@ def main():
     models.Base.metadata.create_all(bind=engine)
     # add_DB()
     # addIpStats("TEST", "opopop")
-    addProtocolStats("53")
-    read_DB()
+    # addProtocolStats("53")
+    # read_DB()
 
     # # drop_DB()
 
