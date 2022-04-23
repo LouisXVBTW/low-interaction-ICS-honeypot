@@ -1,8 +1,6 @@
-import unittest, random
+import unittest
 import sys, os
-from requests import Session
 
-from sqlalchemy import null
 path = os.path.dirname(__file__)+'/../../database/'
 print (path)
 sys.path.append(path)
@@ -21,11 +19,12 @@ class testDatabase(unittest.TestCase):
         self.country = "United Kingdom"
         self.city = "Portsmouth"
         self.shodan = "Normal"
+        self.date = "TestToday"
         self.time = ":time:"
         self.rawData = "RAWBEEF"
-        addIpStats(self.ip, self.protocol)
+        addIpStats(self.ip)
         addProtocolStats(self.protocol)
-        addAllInteractions(self.ip, self.time, self.rawData)
+        addAllInteractions(self.ip, self.protocol, self.date, self.time, self.rawData)
         
         # with SessionLocal.begin() as session:
         #     out1 = session.query(models.IpStats).all()
@@ -47,7 +46,6 @@ class testDatabase(unittest.TestCase):
             for c in session.query(models.IpStats).filter(models.IpStats.ip == self.ip):
                 self.idip = c.id
                 self.assertEqual(c.ip, self.ip)
-                self.assertEqual(c.protocol, self.protocol)
             
         insertGeoShodan(self.idip, self.country, self.city, self.shodan)
         with SessionLocal.begin() as session:
