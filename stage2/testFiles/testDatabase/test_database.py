@@ -1,4 +1,4 @@
-import unittest
+import unittest, time
 import sys, os
 
 path = os.path.dirname(__file__)+'/../../database/'
@@ -36,12 +36,16 @@ class testDatabase(unittest.TestCase):
     def tearDown(self) -> None:
         with SessionLocal.begin() as session:
             session.query(models.IpStats).filter(models.IpStats.id == self.idip).delete()
+            session.commit()
+        with SessionLocal.begin() as session:
             session.query(models.ProtocolStats).filter(models.ProtocolStats.id == self.idprotocol).delete()
+            session.commit()
+        with SessionLocal.begin() as session:
             session.query(models.AllInteractions).filter(models.AllInteractions.ip == self.ip).delete()
             session.commit()
 
     def test_database_IpStats(self) -> None:
-        
+    
         with SessionLocal.begin() as session:
             for c in session.query(models.IpStats).filter(models.IpStats.ip == self.ip):
                 self.idip = c.id
@@ -53,7 +57,7 @@ class testDatabase(unittest.TestCase):
                 self.assertEqual(c.country, self.country)
                 self.assertEqual(c.city, self.city)
                 self.assertEqual(c.shodan, self.shodan)
-        
+        time.sleep(10)
     
     def test_database_ProtocolStats(self):
         
@@ -68,4 +72,4 @@ class testDatabase(unittest.TestCase):
                 self.idall = c.id
                 self.assertEqual(c.ip, self.ip)
                 self.assertEqual(c.time, self.time)
-                self.assertEqual(c.rawData, self.rawData.hex())
+                self.assertEqual(c.rawData, self.rawData)
