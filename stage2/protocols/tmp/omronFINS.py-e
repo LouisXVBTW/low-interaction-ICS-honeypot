@@ -7,9 +7,9 @@ from app import addIpStats, addProtocolStats, addAllInteractions, insertGeoShoda
 import socket, threading
 from socket import error as SocketError
 import errno
-port = 789
 
-class crimsonV3:
+port = 9600
+class omronFINS:
 	def __init__(self, SERVER, protocol):
 		print (SERVER, protocol)
 		ADDR = (SERVER, port) ## makes a tuple
@@ -22,6 +22,8 @@ class crimsonV3:
 		while True:
 			## gets the data of the connector
 			conn, addr = server.accept()
+			addIpStats(addr[0])
+			addProtocolStats(self.protocol)
 			## initiates thread to handle multiple connections
 			thread = threading.Thread(target=self.handle_client, args=(conn, addr))
 			thread.start()
@@ -31,8 +33,7 @@ class crimsonV3:
 	#only running in threads
 	def handle_client(self, conn, addr):
 		print (f"[NEW CONNECTION] {addr} connected.")
-		addIpStats(addr[0])
-		addProtocolStats(self.protocol)
+		
 		
 		connected = True
 		
@@ -58,6 +59,8 @@ class crimsonV3:
 				if e.errno == errno.ECONNRESET:
 
 					print(" + Added to [POTENTIAL NMAP SCANNING]")
+				datetimeinfo = str(datetime.now()).split(" ")
+				addAllInteractions(addr[0], self.protocol, datetimeinfo[0], datetimeinfo[1], "Scanner")
 
 				raise e
 		conn.close()

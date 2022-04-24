@@ -31,8 +31,7 @@ class crimsonV3:
 	#only running in threads
 	def handle_client(self, conn, addr):
 		print (f"[NEW CONNECTION] {addr} connected.")
-		addIpStats(addr[0])
-		addProtocolStats(self.protocol)
+		
 		
 		connected = True
 		

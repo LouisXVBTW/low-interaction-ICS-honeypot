@@ -10,32 +10,32 @@ def addTest1(ititle, icomplete) -> None:
         session.add(new_item)
         session.commit()
 
-def addIpStats(iip):
+def addIpStats(iip, icount):
     new = True
     with SessionLocal.begin() as session:
         
         for c in session.query(models.IpStats).filter(models.IpStats.ip == iip):
-            c.ipCount += 1
+            c.ipCount = icount
             new = False
 
         if new:
-            new_entry = models.IpStats(ip=iip)
+            new_entry = models.IpStats(ip=iip, ipCount=icount)
             session.add(new_entry)
   
-        session.commit()
+    session.commit()
 
-def addProtocolStats(iprotocol):
+def addProtocolStats(iprotocol, icount):
     new = True
     with SessionLocal.begin() as session:
         
         for c in session.query(models.ProtocolStats).filter(models.ProtocolStats.protocol == iprotocol):
-            c.protocolCount += 1
+            c.protocolCount = icount
             new = False
 
         if new:
-            new_item = models.ProtocolStats(protocol=iprotocol)
+            new_item = models.ProtocolStats(protocol=iprotocol, protocolCount=icount)
             session.add(new_item)
-        session.commit()
+    session.commit()
 
 def addAllInteractions(iip, iprotocol, idate, itime, irawData):
     with SessionLocal.begin() as session:
