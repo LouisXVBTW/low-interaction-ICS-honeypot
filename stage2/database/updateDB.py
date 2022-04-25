@@ -17,8 +17,7 @@ from app import addIpStats, addProtocolStats, insertGeoShodan
 # we are now removing all shodan mentions, no longer in prod.
 
 def main() -> None:
-    with open('keys.key', "r") as line:
-        key = line.readline()
+
     while 1:
         time.sleep(30)
         for ip, icount in countIP(getIP()).items():
