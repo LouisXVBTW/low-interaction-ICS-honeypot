@@ -15,7 +15,6 @@ class IpStats(Base):
     ipCount = Column(Integer, default=1)
     country = Column(String)
     city = Column(String)
-    shodan = Column(String)
 
 class ProtocolStats(Base):
     __tablename__ = "protocolStats"

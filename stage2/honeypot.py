@@ -11,6 +11,7 @@ from protocols.omronFINS import *
 from protocols.pcWorks import *
 from protocols.tridiumNiagraFox import *
 #from protocols.sampleProtocol import *
+from database.updateDB import main as runUpdate
 import os
 
 SERVER = "127.0.0.1"
@@ -18,6 +19,10 @@ SERVER = "127.0.0.1"
 def main():
     #print (seimenss7("hello", "people"))
     launchProtocols(SERVER, getProtocols())
+    thread = threading.Thread(target=runUpdate, args=())
+    thread.daemon = True
+    thread.start()
+
 
 def getProtocols():
     path = os.path.dirname(__file__)

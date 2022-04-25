@@ -1,6 +1,7 @@
 
 from itertools import count
 from socket import IP_RETOPTS
+from typing import KeysView
 import models, time, threading
 from controller import SessionLocal, engine
 from app import addIpStats, addProtocolStats, insertGeoShodan
@@ -13,17 +14,23 @@ from app import addIpStats, addProtocolStats, insertGeoShodan
 
 # wait certain time, if there is no change then wait again and check, otherwise do process again 
 
+# we are now removing all shodan mentions, no longer in prod.
 
 def main() -> None:
-
-    for ip, icount in countIP(getIP()).items():
-        addIpStats(ip, icount)
+    with open('keys.key', "r") as line:
+        key = line.readline()
+    while 1:
+        time.sleep(30)
+        for ip, icount in countIP(getIP()).items():
+            addIpStats(ip, icount)
+        
+        for protocol, pcount in countProtocols(getPPROTOCOLS()).items():
+            addProtocolStats(protocol, pcount)   
+        getGeoIPS()
+        time.sleep(30)
     
-    for protocol, pcount in countProtocols(getPPROTOCOLS()).items():
-        addProtocolStats(protocol, pcount)
-       
-    getGeo()
-    getShodan()
+    
+    
 ## get functions    
 def getIP() -> list:
     iips = []
@@ -39,7 +46,7 @@ def getPPROTOCOLS() ->list:
             iprotocols.append(c.protocol)            
     return iprotocols
     
-def getGeo() -> list:
+def getGeoIPS() -> list:
     igeo = []
     with SessionLocal.begin() as session:
         for c in session.query(models.IpStats).filter(models.IpStats.country == None):
@@ -47,13 +54,6 @@ def getGeo() -> list:
             print (c.ip, c.country)
     return igeo
 
-def getShodan() -> list:
-    ishodan = []
-    with SessionLocal.begin() as session:
-        for c in session.query(models.IpStats).filter(models.IpStats.shodan == None):
-            ishodan.append(c.ip)
-            print (c.ip, c.shodan)
-    return ishodan
     
 #do functions
 def countIP(iips):

@@ -50,7 +50,7 @@ class bacnet:
 					datetimeinfo = str(datetime.now()).split(" ")
 					addAllInteractions(addr[0], self.protocol, datetimeinfo[0], datetimeinfo[1], hexOFmsg)
 					print(f"[{addr}] {msg}")
-					conn.send(bytes('Hello World', 'utf-8'))
+					conn.send(bytes('msg', 'utf-8'))
 				if msg == "end":
 					break
 			except SocketError as e:	
