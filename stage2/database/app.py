@@ -60,14 +60,14 @@ def add_DB():
         session.commit()
 
 def read_DB():
-        
+
     with SessionLocal.begin() as session:
         session.query(models.ProtocolStats).filter(models.ProtocolStats.id == 2).delete()
-        out = session.query(models.IpStats).all()
-        print (out)
-        list(map(lambda x:print("IpStats",x.id, x.ip, x.ipCount, x.protocol, x.country, x.city, x.shodan),out))
+        out = session.query(models.ProtocolStats).all()
+        testValue = list(map(lambda x:{'protocol':x.protocol, 'protocolCount': x.protocolCount},out))
         session.commit()
 
+    return testValue
 
         # list(map(lambda x:print(x.id, x.title,x.complete),out))
         # foo = list(map(lambda x:x.title,out))
