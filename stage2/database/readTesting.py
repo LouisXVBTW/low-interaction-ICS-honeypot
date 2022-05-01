@@ -1,7 +1,7 @@
-from fetchfromDB import read_DB
+from fetchfromDB import read_protocols
 
 
-protocolsPie = read_DB()
+protocolsPie = read_protocols()
 pnames = list(map(lambda x:str(x["protocol"]), protocolsPie))
 
 print (type(pnames))

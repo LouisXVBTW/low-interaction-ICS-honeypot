@@ -1,4 +1,4 @@
-import models, random
+import models
 from controller import SessionLocal, engine
 
 
