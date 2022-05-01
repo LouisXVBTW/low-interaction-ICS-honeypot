@@ -6,46 +6,189 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <script src="htmx.js"></script>
-    <script src="tailwindcss.js"></script>
     <script src="chart.min.js"></script>
     <script src="makeCharts.js"></script>
-    
-</head>
-<body>
-    <p class="p-6 bg-red-500">Hello world!</p>
-    
-    <div class="mx-4">
-        <p class="text-2x1 font-bold mb-4">
-            <table class="min-w-[50%] mb-4">
-                <thead class="border-b ">
-                    <tr>
-                        <th class="border">Protocols</th>
-                        <th class="border">Protocol Count</th>
-                    </tr>
-                    <tbody class="text-center text-sm">
-                        {% for testItem in testItems %}
-                        <tr>
-                        <td class="border">{{testItem.protocol}}</td>
-                        <td class="border">{{testItem.protocolCount}}</td>
-                        </tr>
-                        {% endfor %} 
-                    </tbody>
-                </thead>
-            </table>
-
-            <button class="px-3 py-1 bg-blue-600 text-white ml-4">Load in more</button>
-        </br>
-        
+    <style>
+  
+        html, body{ 
             
        
-        </p>
+        min-width:100%;
+        }
+        .container {  display: grid;
+            width: auto;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 0px 0px;
+            grid-auto-flow: row;
+            grid-template-areas:
+                ". ."
+                ". ."
+                ". .";
+            }
+        
+.table-wrapper{
+    margin: 10px 70px 70px;
+    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+}
+
+.fl-table {
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: white;
+}
+
+.fl-table td, .fl-table th {
+    text-align: center;
+    padding: 8px;
+}
+
+.fl-table td {
+    border-right: 1px solid #f8f8f8;
+    font-size: 12px;
+}
+
+.fl-table thead th {
+    color: #ffffff;
+    background: #4FC3A1;
+}
+
+
+.fl-table thead th:nth-child(odd) {
+    color: #ffffff;
+    background: #324960;
+}
+
+.fl-table tr:nth-child(even) {
+    background: #F8F8F8;
+}
+
+/* Responsive */
+
+@media (max-width: 767px) {
+    .fl-table {
+        display: block;
+        width: 100%;
+    }
+    .table-wrapper:before{
+        content: "Scroll horizontally >";
+        display: block;
+        text-align: right;
+        font-size: 11px;
+        color: white;
+        padding: 0 0 10px;
+    }
+    .fl-table thead, .fl-table tbody, .fl-table thead th {
+        display: block;
+    }
+    .fl-table thead th:last-child{
+        border-bottom: none;
+    }
+    .fl-table thead {
+        float: left;
+    }
+    .fl-table tbody {
+        width: auto;
+        position: relative;
+        overflow-x: auto;
+    }
+    .fl-table td, .fl-table th {
+        padding: 20px .625em .625em .625em;
+        height: 60px;
+        vertical-align: middle;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 120px;
+        font-size: 13px;
+        text-overflow: ellipsis;
+    }
+    .fl-table thead th {
+        text-align: left;
+        border-bottom: 1px solid #f7f7f9;
+    }
+    .fl-table tbody tr {
+        display: table-cell;
+    }
+    .fl-table tbody tr:nth-child(odd) {
+        background: none;
+    }
+    .fl-table tr:nth-child(even) {
+        background: transparent;
+    }
+    .fl-table tr td:nth-child(odd) {
+        background: #F8F8F8;
+        border-right: 1px solid #E6E4E4;
+    }
+    .fl-table tr td:nth-child(even) {
+        border-right: 1px solid #E6E4E4;
+    }
+    .fl-table tbody td {
+        display: block;
+        text-align: center;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+                <table class="fl-table">
+                    <thead>
+                        <tr>
+                            <th>Protocols</th>
+                            <th>Protocol Count</th>
+                        </tr>
+                    </thead>
+
+                            {% for protocols in allpies[1][2]%}
+                            {%set protocolCount = allpies[1][3][loop.index-1]%}
+                            <tr>
+                            <td>{{protocols}}</td>
+                            <td>{{protocolCount}}</td>
+                            </tr>
+                            {% endfor %}
+                </table> 
+        </div>
+    
+        <div >
+            <canvas id="protocolsBar"></canvas> 
+        </div>
+        <div class="tablecontent">
+            <table class="fl-table">
+                <thead>
+                <tr>
+                    <th>IP</th>
+                    <th>IP Count</th>
+                </tr>
+                </thead>
+                {% for ips in allpies[0][2]%}
+                {%set ipCount = allpies[0][3][loop.index-1]%}
+                <tr>
+                <td>{{ips}}</td>
+                <td>{{ipCount}}</td>
+                </tr>
+                {% endfor %} 
+                </table> 
+        </div>
+        
+        <div>
+            <canvas id="ipsBar"></canvas>
+        </div>
+
+        
+
     </div>
-    <div style="width: 50%" >
-        <canvas id="protocolsBar"></canvas> 
-    </div>
-    <div style="width: 50%;">
-        <canvas id="ipsBar"></canvas>
-    </div>
+
+
+    
+    
     <script>
     {%for items in allpies%}
     makeChart("{{items[0]}}", "{{items[1]}}", {{items[2]|safe}}, {{items[3]|safe}})

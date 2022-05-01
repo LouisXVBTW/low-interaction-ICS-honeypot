@@ -5,7 +5,7 @@ from fastapi.templating import Jinja2Templates
 import os, sys, json
 filename = os.path.dirname(__file__)
 sys.path.append(filename+"/../database")
-from fetchfromDB import read_protocols, read_ips
+from fetchfromDB import read_protocols, read_ips, read_geo
 app = FastAPI()
 
 templates = Jinja2Templates(directory="templates")
@@ -17,8 +17,10 @@ async def readIndex(request: Request):
     allpies = []
     protocolsPie = read_protocols()
     ipsPie = read_ips()
+    countryANDcity = read_geo()
     allpies.append(["ipsBar", "IP Interaction Count", list(map(lambda x:x['ip'], ipsPie)), list(map(lambda x:x["ipCount"], ipsPie))])
     allpies.append(["protocolsBar", "Protocol Interaction Count", list(map(lambda x:x["protocol"], protocolsPie)), list(map(lambda x: x["protocolCount"], protocolsPie))])
+    # allpies.append(["country", "Country Interaction Count", list(map(lambda x:x["country"], countryPie)), list(map())
     context = {"request": request, "testItems": protocolsPie, "allpies": allpies}
     return templates.TemplateResponse("index.html", context)
 
