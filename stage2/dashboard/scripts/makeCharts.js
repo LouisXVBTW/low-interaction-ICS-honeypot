@@ -21,11 +21,7 @@ function makeChart(whatpie, piename, labels, data){
                     }
                 }
             },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
+            
         }
     });
 

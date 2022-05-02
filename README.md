@@ -45,3 +45,10 @@ connect honeypot protocols to DB
 |test db|&check;|
 |input data to db|&check;|
 |fetch data from db |&check;| 
+
+NEED TO DOCUMENT THE UPDATING THE DATABASE EVERY MINUTE PART
+
+
+# Stage 3
+
+Used fastapi and css and jinja2 html templates and chart.js to make a simple front end dashboard. Need to show the data collection from the database and show how everything was made ;)   
