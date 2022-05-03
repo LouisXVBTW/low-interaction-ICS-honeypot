@@ -1,10 +1,8 @@
+import requests, json
 
-from itertools import count
-from socket import IP_RETOPTS
-from typing import KeysView
 import models, time, threading
 from controller import SessionLocal, engine
-from app import addIpStats, addProtocolStats, insertGeoShodan
+from app import addIpStats, addProtocolStats, insertGeo
 # get all unique ips and protocols
 # use this list to count how many there are (protocols and ips)
 # then check which ips dont have location data
@@ -45,13 +43,7 @@ def getPPROTOCOLS() ->list:
             iprotocols.append(c.protocol)            
     return iprotocols
     
-def getGeoIPS() -> list:
-    igeo = []
-    with SessionLocal.begin() as session:
-        for c in session.query(models.IpStats).filter(models.IpStats.country == None):
-            igeo.append(c.ip)
-            print (c.ip, c.country)
-    return igeo
+
 
     
 #do functions
@@ -69,7 +61,34 @@ def countProtocols(iprotocols):
         with SessionLocal.begin() as session:
             count = session.query(models.AllInteractions).filter(models.AllInteractions.protocol == i).count()
             protocolsCount[i] = count
-    return protocolsCount       
-     
+    return protocolsCount
+
+def getGeoIPS() -> list:
+    igeo = []
+    with SessionLocal.begin() as session:
+        for c in session.query(models.IpStats).filter(models.IpStats.country == None).distinct():
+            if c == None:
+                print("None worked")
+                return None
+            igeo.append(c.ip)
+            print (c.ip, c.country)
+    
+    return igeo
+
+def findGeo(iips):
+    if iips == None:
+        pass
+    for i in iips:
+        url = 'http://ipwho.is/' + i 
+        x = requests.get(url)
+        response = x.content.decode().replace('"', '\"')
+        d = json.loads(response)
+        try:
+            print(i)
+            insertGeo(i, d['country'], d['city'])
+        except:
+            print('localhost')
+
 if __name__ == "__main__":
-    main()
+    # main()
+    findGeo(getGeoIPS())

@@ -43,12 +43,11 @@ def addAllInteractions(iip, iprotocol, idate, itime, irawData):
         session.add(new_item)
         session.commit()
 
-def insertGeoShodan(iid, icountry, icity, ishodan):
+def insertGeo(iip, icountry, icity):
     with SessionLocal.begin() as session:
-        for c in session.query(models.IpStats).filter(models.IpStats.id == iid):
+        for c in session.query(models.IpStats).filter(models.IpStats.ip == iip):
             c.country = icountry
             c.city = icity
-            c.shodan = ishodan
         session.commit()
 
 def add_DB():
