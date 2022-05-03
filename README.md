@@ -53,3 +53,8 @@ NEED TO DOCUMENT THE UPDATING THE DATABASE EVERY MINUTE PART
 
 Used fastapi and css and jinja2 html templates and chart.js to make a simple front end dashboard. Need to show the data collection from the database and show how everything was made ;) 
 show the use of APIs toget the geo data stuff, but that should all be for stage 2 i think, or maybe i can move it and keep it in stage3. IDK for sure yet, ill do alot of writing tmrw cause ive almost done this anyways.  
+
+>sqlite> select protocolCount from protocolStats order by protocolCount desc limit 2;  
+>128\
+>58\
+>sqlite>

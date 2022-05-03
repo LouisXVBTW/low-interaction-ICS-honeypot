@@ -3,16 +3,26 @@ import requests, json
 import models, time, threading
 from controller import SessionLocal, engine
 from app import addIpStats, addProtocolStats, insertGeo
-# get all unique ips and protocols
-# use this list to count how many there are (protocols and ips)
-# then check which ips dont have location data
+# get all unique ips and protocols |done|
+# use this list to count how many there are (protocols and ips) |done|
+# then check which ips dont have location data |done|
 # select amount allowed to check with the api of choice for location
 
-# then check for those that dont have shodan data and do the same
+# sqlite> select protocolCount from protocolStats order by protocolCount desc limit 2;  
+# 128
+# 58
+# sqlite>
 
-# wait certain time, if there is no change then wait again and check, otherwise do process again 
+# Get the ids too from the search and then stick them into this query
+# sqlite> SELECT SUM(protocolCount) FROM protocolStats WHERE id != 11 AND id != 3;
+# 332
+# sqlite>
 
-# we are now removing all shodan mentions, no longer in prod.
+# which will give us the "other" count.
+
+# wait certain time, if there is no change then wait again and check, otherwise do process again |done|
+
+# we are now removing all shodan mentions, no longer in prod. 
 
 def main() -> None:
 
@@ -30,6 +40,7 @@ def main() -> None:
     
 ## get functions    
 def getIP() -> list:
+    
     iips = []
     with SessionLocal.begin() as session:
         for c in session.query(models.AllInteractions.ip).distinct():

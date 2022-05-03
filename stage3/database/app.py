@@ -68,15 +68,6 @@ def read_DB():
 
     return testValue
 
-        # list(map(lambda x:print(x.id, x.title,x.complete),out))
-        # foo = list(map(lambda x:x.title,out))
-        # print (foo)
-
-# def drop_DB():
-#     with SessionLocal.begin() as session:
-#         session.drop(models.Test1)
-#         session.commit()
-
 def main():
     models.Base.metadata.create_all(bind=engine)
     # add_DB()
