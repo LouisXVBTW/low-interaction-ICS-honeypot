@@ -3,12 +3,12 @@ from controller import SessionLocal, engine
 
 
 
-def addTest1(ititle, icomplete) -> None:
+def addTest1(ititle, icomplete):
     with SessionLocal.begin() as session:
 
         new_item = models.Test1(title=ititle, complete=icomplete)
         session.add(new_item)
-        session.commit()
+    session.commit()
 
 def addIpStats(iip, icount):
     new = True

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="chart.min.js"></script>
+    <script src="makeCharts.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <canvas id="sample1"></canvas>
+        </div>
+        <div>
+            <canvas id="sample2"></canvas>
+        </div>
+        <div>
+            <canvas id="sample3"></canvas>
+        </div>
+        <div>
+            <canvas id="sample4"></canvas>
+        </div>
+    </div>
+    <script>
+        makeChart('sample1', 'Sample 1', ['item 1', 'item 2', 'item 3'], [2, 4, 3]);
+        makeChart('sample2', 'Sample 2', ['item 1', 'item 2', 'item 3'], [4, 2, 3]);
+        makeChart('sample3', 'Sample 3', ['item 1', 'item 2', 'item 3'], [3, 2, 4]);
+        makeChart('sample4', 'Sample 4', ['item 1', 'item 2', 'item 3'], [3, 4, 2]);
+
+    </script>
+</body>
+</html>

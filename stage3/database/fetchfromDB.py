@@ -3,25 +3,24 @@ from controller import SessionLocal, engine
 from sqlalchemy.sql import func
 
 def read_protocols():
-
     with SessionLocal.begin() as session:
-        out = session.query(models.ProtocolStats).order_by(models.ProtocolStats.protocolCount.desc()).limit(10)
+        out = session.query(models.ProtocolStats).order_by(models.ProtocolStats.protocolCount.desc())
         foo = list(map(lambda x:{'protocol':x.protocol, 'protocolCount': x.protocolCount},out))
-        return foo
+    return foo
 
 def read_ips():
     with SessionLocal.begin() as session:
        
-        out = session.query(models.IpStats).all()
+        out = session.query(models.IpStats).order_by(models.IpStats.ipCount.desc()).limit(10)
         foo = list(map(lambda x:{'ip':x.ip, 'ipCount': x.ipCount},out))
         top10 = list(map(lambda x: x.id, out))
-        print(top10)
+        # print(top10)
         otherCount = session.query(func.sum(models.IpStats.ipCount)).filter(models.IpStats.id.notin_(top10))
         if otherCount[0][0] != None:
             
             foo.append({'ip':'Other','ipCount':otherCount[0][0]})
         
-        return foo
+    return foo
 
 
 def read_geo():
@@ -87,3 +86,4 @@ def read_geo():
     return geo
 if __name__ == "__main__":
     models.Base.metadata.create_all(bind=engine)
+    print(read_protocols())

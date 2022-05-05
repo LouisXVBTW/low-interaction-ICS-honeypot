@@ -33,7 +33,9 @@ def main() -> None:
         
         for protocol, pcount in countProtocols(getPPROTOCOLS()).items():
             addProtocolStats(protocol, pcount)   
-        getGeoIPS()
+        
+        findGeo(getGeoIPS())
+       
         time.sleep(30)
     
     
@@ -79,7 +81,6 @@ def getGeoIPS() -> list:
     with SessionLocal.begin() as session:
         for c in session.query(models.IpStats).filter(models.IpStats.country == None).distinct():
             if c == None:
-                print("None worked")
                 return None
             igeo.append(c.ip)
             print (c.ip, c.country)
@@ -101,5 +102,5 @@ def findGeo(iips):
             print('localhost')
 
 if __name__ == "__main__":
-    # main()
-    findGeo(getGeoIPS())
+    main()
+    
