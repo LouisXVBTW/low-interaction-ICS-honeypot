@@ -1,3 +1,6 @@
+We are finally over and done ;)
+
+
 # Stage 1
 
 This wille be for general notes are i recode this for when im taking screenshots and writing it up
