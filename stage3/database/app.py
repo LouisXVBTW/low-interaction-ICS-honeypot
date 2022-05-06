@@ -41,7 +41,7 @@ def addAllInteractions(iip, iprotocol, idate, itime, irawData):
     with SessionLocal.begin() as session:
         new_item = models.AllInteractions(ip=iip, protocol=iprotocol, date=idate, time=itime, rawData=irawData)
         session.add(new_item)
-        session.commit()
+    session.commit()
 
 def insertGeo(iip, icountry, icity):
     with SessionLocal.begin() as session:
