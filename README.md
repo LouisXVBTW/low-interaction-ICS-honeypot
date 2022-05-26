@@ -1,7 +1,7 @@
 # A simple low-interraction honeypot for ICS systems
 
 ## =TO INSTALL AND RUN=
-### **Recommend installing to a virtual environment**
+### <p style="color:red">**Recommend installing to a virtual environment**</p>
 ```
 > pip3 install -r requirements.txt;\
 > cd final/;\
