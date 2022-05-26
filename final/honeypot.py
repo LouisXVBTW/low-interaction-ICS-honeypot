@@ -13,6 +13,9 @@ from protocols.tridiumNiagraFox import *
 #from protocols.sampleProtocol import *
 from database.updateDB import main as runUpdate
 import os
+print(os.getcwd())
+filename = os.getcwd()+'/dashboard'
+print (filename)
 
 SERVER = "127.0.0.1"
 
@@ -22,6 +25,9 @@ def main():
     thread = threading.Thread(target=runUpdate, args=())
     thread.daemon = True
     thread.start()
+    thread2 = threading.Thread(target=runDash, args=())
+    thread2.daemon = True
+    thread2.start()
 
 
 def getProtocols():
@@ -38,15 +44,10 @@ def launchProtocols(SERVER, protocols):
                 thread = threading.Thread(target=eval(i[:-3]), args=[SERVER, i[:-3]])
                 thread.start()
 
-
-def checkDB():
-    pass
-
 def runDash():
-    pass
+    os.system(f'cd {filename};uvicorn dashboard:app --reload')
 
-def exportCowrie():
-    pass
+
 
 if __name__ == "__main__":
     main()  

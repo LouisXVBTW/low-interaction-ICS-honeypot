@@ -2,7 +2,7 @@ from datetime import datetime
 import sys, os
 filename = os.path.dirname(__file__)+"/../database/"
 sys.path.append(filename)
-from app import addIpStats, addProtocolStats, addAllInteractions, insertGeoShodan
+from app import addIpStats, addProtocolStats, addAllInteractions, insertGeo
 
 import socket, threading
 from socket import error as SocketError

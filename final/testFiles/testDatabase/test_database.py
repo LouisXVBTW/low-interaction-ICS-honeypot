@@ -16,13 +16,13 @@ class testDatabase(unittest.TestCase):
         self.idall= None
         self.ip = "test.ip.com"
         self.protocol = "UnitTestingProtocol"
-        self.country = "United Kingdom"
+        self.country = "UnitedKingdom"
         self.city = "Portsmouth"
         self.date = "TestToday"
         self.time = ":time:"
         self.rawData = "RAWBEEF"
-        addIpStats(self.ip)
-        addProtocolStats(self.protocol)
+        addIpStats(self.ip, 1)
+        addProtocolStats(self.protocol, 1)
         addAllInteractions(self.ip, self.protocol, self.date, self.time, self.rawData)
         
 
@@ -44,7 +44,7 @@ class testDatabase(unittest.TestCase):
                 self.idip = c.id
                 self.assertEqual(c.ip, self.ip)
             
-        insertGeo(self.idip, self.country, self.city)
+        insertGeo(self.ip, self.country, self.city)
         with SessionLocal.begin() as session:
             for c in session.query(models.IpStats).filter(models.IpStats.ip == self.ip):    
                 self.assertEqual(c.country, self.country)
